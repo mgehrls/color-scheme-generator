@@ -29,7 +29,7 @@ function colorHtml(){
         <div id='color' onclick="grabColor(${i})">
             <div class='color-dis'style="background-color:${currentColor}">
             </div>
-            <div class='color-text'>
+            <div class='color-text' style="background-color:${currentColor}">
                 <p class="color-name">${colorArray[i].name.value}</p>
                 <p class="color-hex-value">${currentColor}</p>
                 <p class="color-rgb">${colorArray[i].rgb.value}</p>
