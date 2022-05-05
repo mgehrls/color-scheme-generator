@@ -7,7 +7,7 @@ let colorChange= document.getElementById('colorchange')
 
 document.getElementById('get-color-scheme').addEventListener("click", function(evt){
     evt.preventDefault()
-    colorID = document.getElementById('color-id').value.replace('#', "")
+    colorID = document.getElementById('color-picker').value.replace('#', "")
     colorScheme = document.getElementById('color-schemes').value
     getColorArray()
     setTimeout(() => {colorHtml()}, 500)
@@ -18,20 +18,23 @@ function getColorArray(){
         .then(res => res.json())
         .then(data => {
             colorArray = data.colors
+            console.log(data.colors)
 })}
 
 function colorHtml(){
     colorSecHtml = ""
     for(let i = 0; i<colorArray.length; i++){
-        currentColor =colorArray[i].hex.value
+        currentColor = colorArray[i].hex.value
         colorSecHtml += `
-        <div id='color-column' onclick="grabColor(${i})">
+        <div id='color' onclick="grabColor(${i})">
             <div class='color-dis'style="background-color:${currentColor}">
             </div>
             <div class='color-text'>
-                <p>${currentColor}</p>
+                <p class="color-name">${colorArray[i].name.value}</p>
+                <p class="color-hex-value">${currentColor}</p>
+                <p class="color-rgb">${colorArray[i].rgb.value}</p>
             </div>
-            </div>`
+         </div>`
     }
     colorSec.innerHTML = colorSecHtml
 }
@@ -41,10 +44,3 @@ let copyColor = colorArray[i].hex.value
     navigator.clipboard.writeText(copyColor);
     alert("Copied '" + copyColor + "' to clipboard.")
 }
-
-let content = document.getElementsByTagName('body')[0];
-let darkMode = document.getElementById('dark-change');
-darkMode.addEventListener('click', function(){
-    darkMode.classList.toggle('active');
-    content.classList.toggle('night');
-})
