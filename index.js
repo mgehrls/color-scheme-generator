@@ -1,46 +1,53 @@
+/* Global Variables */
+
 let colorID = ""
 let colorScheme = ""
+let colorSecHtml = ""
 let colorArray = []
 const colorSec = document.getElementById('color-sec')
-let colorSecHtml = ""
-let colorChange= document.getElementById('colorchange')
 
-document.getElementById('get-color-scheme').addEventListener("click", function(evt){
+
+/* Button click grabs the color from the #color-picker, grabs the scheme
+from #color-schemes, then getColorArray()*/
+
+document.getElementById('color-btn').addEventListener("click", function(evt){
     evt.preventDefault()
     colorID = document.getElementById('color-picker').value.replace('#', "")
     colorScheme = document.getElementById('color-schemes').value
     getColorArray()
-    setTimeout(() => {colorHtml()}, 500)
 })
 
-function getColorArray(){
-    fetch(`https://www.thecolorapi.com/scheme?hex=${colorID}&mode=${colorScheme}&count=5`)
-        .then(res => res.json())
-        .then(data => {
-            colorArray = data.colors
-            console.log(data.colors)
-})}
+/* Async function to get colors that meet the criteria specified. then 
+runs getColorHtml() + error handling */
 
-function colorHtml(){
+async function getColorArray(){
+    try{
+    let res = await fetch(`https://www.thecolorapi.com/scheme?hex=${colorID}&mode=${colorScheme}&count=5`)
+    let data = await res.json()
+    colorArray = data.colors
+    getColorHtml()} catch (err){
+        alert(err + "Please Try Again.")
+    }}
+
+/* for loop */
+
+function getColorHtml(){
     colorSecHtml = ""
-    for(let i = 0; i<colorArray.length; i++){
-        currentColor = colorArray[i].hex.value
+    colorArray.forEach((color)=>{
         colorSecHtml += `
-        <div id='color' onclick="grabColor(${i})">
-            <div class='color-dis'style="background-color:${currentColor}">
-            </div>
-            <div class='color-text' style="background-color:${currentColor}">
-                <p class="color-name">${colorArray[i].name.value}</p>
-                <p class="color-hex-value">${currentColor}</p>
-                <p class="color-rgb">${colorArray[i].rgb.value}</p>
+        <div class='color' id='color' style="background-color:${color.hex.value}" onclick="grabColor(${color.hex.value})">
+            <div class='color--text'> 
+                <p class="color--name">${color.name.value}</p>
+                <p class="color--hex">${color.hex.value}</p>
+                <p class="color--rgb">${color.rgb.value}</p>
             </div>
          </div>`
-    }
+    })
     colorSec.innerHTML = colorSecHtml
+    console.log(colorSecHtml)
 }
 
 function grabColor(i){
-let copyColor = colorArray[i].hex.value
-    navigator.clipboard.writeText(copyColor);
-    alert("Copied '" + copyColor + "' to clipboard.")
+    navigator.clipboard.writeText(i);
+    alert("Copied '" + i + "' to clipboard.")
 }

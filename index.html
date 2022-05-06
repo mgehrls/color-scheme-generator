@@ -16,15 +16,13 @@
     <body>
 
         <div class="title-half">
+
             <h1 class="title">Color Palette Generator</h1>
             <p class="subtitle">A lazy persons way of creating<br/> fun color schemes.</p>
-        </div>
-
-        <div class="color-half">
-
+        
             <form>
-                <input id='color-picker' type="color"/>
-                <select id="color-schemes" name="color-schemes">
+                <input class='color-picker' id='color-picker' type="color"/>
+                <select class='color-schemes' id="color-schemes" name="color-schemes">
                     <option value="monochrome">Monochrome</option>
                     <option value="monochrome-dark">Monochrome-dark</option>
                     <option value="monochrome-light">Monochrome-light</option>
@@ -34,16 +32,58 @@
                     <option value="triad">Triad</option>
                     <option value="quad">Quad</option>
                 </select>
-                <button id='get-color-scheme' type="sumbit">Get color scheme</button>
+                <button class='color-btn' id='color-btn' type="sumbit">Get color scheme</button>
             </form>
+        </div><!-- end of .title-half -->
 
-            <!-- this div is filled in javascript -->
-            <div id='color-sec'>
-                
-            </div>
+        <div class="color-half">
+
+            <!-- this div is updated in javascript -->
+            <div class='color-sec' id="color-sec">
+
+                <div class='color' id='color' style="background-color:red" onclick="grabColor('#FF0000')">
+                    <div class="color--text">
+                        <p class="color--name">Red</p>
+                        <p class="color--hex">#FF0000</p>
+                        <p class="color--rgb">rgb(255, 0, 0)</p>
+                    </div>
+                </div>
+
+                <div class='color' id='color' style="background-color:#ffa500" onclick="grabColor('#FFA500')">
+                    <div class="color--text">
+                        <p class="color--name">Orange</p>
+                        <p class="color--hex">#FFA500</p>
+                        <p class="color--rgb">rgb(255, 165, 0)</p>
+                    </div>
+                </div>
+
+                <div class='color' id='color' style="background-color:#ffff00" onclick="grabColor('#FFFF00')">
+                    <div class="color--text">
+                        <p class="color--name">Yellow</p>
+                        <p class="color--hex">#FFFF00</p>
+                        <p class="color--rgb">rgb(255, 255, 0)</p>
+                    </div>
+                </div>
+
+                <div class='color' id='color' style="background-color:#008000" onclick="grabColor('#008000')">
+                    <div class="color--text">
+                        <p class="color--name">Green</p>
+                        <p class="color--hex">#008000</p>
+                        <p class="color--rgb">rgb(0, 128, 0)</p>
+                    </div>
+                </div>
+
+                <div class='color' id='color' style="background-color:#0000ff" onclick="grabColor('#0000FF')">
+                    <div class="color--text">
+                        <p class="color--name">Blue</p>
+                        <p class="color--hex">#0000FF</p>
+                        <p class="color--rgb">rgb(0, 0, 255)</p>
+                    </div>
+                </div>
+
+            </div> <!-- End of .color-sec -->
+            <p class="copy-prompt">Click a color to copy the #hex value.</p>
         </div>  
-            
-
 
         <script src="index.js"></script>
     </body>
