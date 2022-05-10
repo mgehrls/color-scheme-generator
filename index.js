@@ -19,6 +19,7 @@ async function getColorArray(id, scheme){
     let res = await fetch(`https://www.thecolorapi.com/scheme?hex=${id}&mode=${scheme}&count=5`)
     let data = await res.json()
     const colorArray = data.colors
+    console.log(id + scheme)
     renderColorHtml(colorArray)} catch (err){
         alert(err + "Please Try Again.")
     }}
@@ -56,3 +57,5 @@ function grabColor(i) {
             alert("Copied '" + i + "' to clipboard.")
         })
 }
+
+window.addEventListener("load", getColorArray("ff00ff", "monochrome-dark"))
