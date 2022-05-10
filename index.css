@@ -97,6 +97,10 @@ form{
     color:inherit;
     cursor: pointer;
 }
+select option{
+    background-color: var(--clr-dark);
+    color: var(--clr-light);
+}
 
 button{
     border-radius: 5px;
